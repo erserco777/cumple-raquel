@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sorpresa Especial</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Georgia', serif;
+      background: #f6f5f2;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      transition: background 0.6s ease;
+    }
+    .container {
+      width: 100%;
+      max-width: 600px;
+      padding: 2rem;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s forwards;
+      margin: 1rem;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    h1, h2 {
+      margin-bottom: 1rem;
+    }
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    button {
+      background: #2a7a78;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #1e5958;
+    }
+    .hidden {
+      display: none;
+    }
+    .option {
+      background: #f0f0f0;
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 0.5rem 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .option:hover {
+      background: #e0e0e0;
+    }
+    .correct {
+      background: #b7e4c7 !important;
+    }
+    .incorrect {
+      background: #f8d7da !important;
+      animation: shake 0.3s;
+    }
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+
+    /* ------------------------- */
+    /* MODO RESPONSIVE MOBILE */
+    /* ------------------------- */
+    @media (max-width: 480px) {
+      .container {
+        padding: 1.2rem;
+        margin: 0.5rem;
+        border-radius: 12px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      h2 {
+        font-size: 1.2rem;
+      }
+
+      button {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0.75rem;
+      }
+
+      .option {
+        padding: 0.75rem;
+        font-size: 0.95rem;
+      }
+
+      audio {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="step0">
+    <h1>Tinc una sorpresa per a tu...</h1>
+    <p>Però hauràs de descobrir-la pas a pas 🕵️‍♀️</p>
+    <button onclick="nextStep(1)">Començar</button>
+  </div>
+
+  <div class="container hidden" id="step1">
+    <img src="https://www.papelpintado.com/media/catalog/product/cache/765175cf1e0a4cff0292d295081d4aa3/w/1/w12791-small.jpg" alt="Paisatge 1">
+    <h2>Quina flor creix en grans quantitats en aquest destí?</h2>
+    <div class="option" onclick="checkAnswer(this, false)">Roses</div>
+    <div class="option" onclick="checkAnswer(this, false)">Gira-sols</div>
+    <div class="option" onclick="checkAnswer(this, false)">Lavanda</div>
+    <div class="option" onclick="checkAnswer(this, true)">Hortènsies</div>
+    <div class="option" onclick="checkAnswer(this, false)">Camel·lies</div>
+    <div class="option" onclick="checkAnswer(this, false)">Dàlies</div>
+  </div>
+
+  <div class="container hidden" id="step2">
+    <img src="https://www.sidul.es/wp-content/uploads/2023/03/1680256874_1421_cocktail_de_toranja_alegrim_e_gin_receita-760x366.jpg" alt="Paisatge 2">
+    <h2>Aquí s'elabora una beguda molt especial a base d'una fruita tropical. Quina és?</h2>
+    <div class="option" onclick="checkAnswer(this, true)">Pinya</div>
+    <div class="option" onclick="checkAnswer(this, false)">Maduixa</div>
+    <div class="option" onclick="checkAnswer(this, false)">Mango</div>
+    <div class="option" onclick="checkAnswer(this, false)">Papaia</div>
+    <div class="option" onclick="checkAnswer(this, false)">Meló</div>
+    <div class="option" onclick="checkAnswer(this, false)">Síndria</div>
+  </div>
+
+  <div class="container hidden" id="step3">
+    <img src="https://lh6.googleusercontent.com/proxy/-VwANNEJXvW1dVe8TxUV9XOC_lw-m6lQFw9DreXH2P-kRnrF0_aoSAF32I6nPXZRsOwE_0jhyDDEUSF-MrCS7M0" alt="Paisatge 3">
+    <h2>Quin tipus de paisatge predomina en aquest lloc?</h2>
+    <div class="option" onclick="checkAnswer(this, false)">Desert</div>
+    <div class="option" onclick="checkAnswer(this, true)">Volcànic</div>
+    <div class="option" onclick="checkAnswer(this, false)">Selva tropical</div>
+    <div class="option" onclick="checkAnswer(this, false)">Estepa</div>
+    <div class="option" onclick="checkAnswer(this, false)">Tundra</div>
+    <div class="option" onclick="checkAnswer(this, false)">Sabana</div>
+  </div>
+
+  <div class="container hidden" id="step4">
+    <img src="https://www.civitatis.com/f/maldivas/maldivas/guia/flora-fauna.jpg" alt="Paisatge 4">
+    <h2>Quin animal marí pots vore amb freqüència ací?</h2>
+    <div class="option" onclick="checkAnswer(this, false)">Fòques</div>
+    <div class="option" onclick="checkAnswer(this, false)">Pingüins</div>
+    <div class="option" onclick="checkAnswer(this, false)">Cavallets de mar</div>
+    <div class="option" onclick="checkAnswer(this, true)">Balenes</div>
+    <div class="option" onclick="checkAnswer(this, false)">Estrelles de mar</div>
+    <div class="option" onclick="checkAnswer(this, false)">Tiburons</div>
+  </div>
+
+  <div class="container hidden" id="step5">
+    <img src="https://images.turismoenportugal.org/Lagoa-das-Furnas.jpg" alt="Paisatge 5">
+    <h2>Quin color predomina en els seus llacs més famosos?</h2>
+    <div class="option" onclick="checkAnswer(this, false)">Negre</div>
+    <div class="option" onclick="checkAnswer(this, false)">Roig</div>
+    <div class="option" onclick="checkAnswer(this, false)">Blanc</div>
+    <div class="option" onclick="checkAnswer(this, true)">Verd i blau</div>
+    <div class="option" onclick="checkAnswer(this, false)">Groc i marró</div>
+    <div class="option" onclick="checkAnswer(this, false)">Gris i turquesa</div>
+  </div>
+
+  <div class="container hidden" id="final">
+    <h1>🎉 Ja ho has descobert?</h1>
+    <p>El destí és un paradís natural, ple de paisatges volcànics, llacs màgics, flors precioses i fauna salvatge.</p>
+    <p>Vols s'aber on anem? 🌿</p>
+    <button onclick="nextStep('congrats')">Descobreix el nostre nou destí!!</button>
+  </div>
+
+  <div class="container hidden" id="congrats">
+    <h1>🎁 Ens anem de viatge!</h1>
+    <img src="https://futurismo.pt/wp-content/uploads/2023/12/Enrico-Pescantini_Sao-Miguel_Sete-Cidades_Group-5-PANO0001_PANO0026-26-images-1024x683.jpg" alt="Azores" />
+    <p>Destí: Açores, Portugal 🌊</p>
+    <p>🗓️ Dates: 16 al 24 d'agost</p>
+    <p>✈️ Maleta llesta, aventura assegurada</p>
+    <p>Et mereixes aquesta escapada... i més! Espere que t'emocione el viatge i que pugam descansar i disfrutar a parts iguals!! </p>
+    <p style="font-size: 0.9rem; color: #888; margin-top: 1rem;">Fet amb 💙 per algú que t'estima </br> més que res al mon</p>
+  </div>
+
+  <script>
+    let currentStep = 0;
+
+    function nextStep(step) {
+      const currentId = typeof currentStep === 'number' ? `step${currentStep}` : currentStep;
+      document.getElementById(currentId)?.classList.add('hidden');
+
+      const nextId = typeof step === 'number' ? `step${step}` : step;
+      document.getElementById(nextId)?.classList.remove('hidden');
+
+      currentStep = step;
+    }
+
+    function checkAnswer(el, correct) {
+      const options = el.parentElement.querySelectorAll('.option');
+      options.forEach(opt => opt.style.pointerEvents = 'none');
+
+      if (correct) {
+        el.classList.add('correct');
+        setTimeout(() => {
+          if (currentStep < 5) {
+            nextStep(currentStep + 1);
+          } else {
+            nextStep('final');
+          }
+        }, 1000);
+      } else {
+        el.classList.add('incorrect');
+        setTimeout(() => {
+          el.classList.remove('incorrect');
+          options.forEach(opt => opt.style.pointerEvents = 'auto');
+        }, 600);
+      }
+    }
+  </script>
+</body>
+</html>
